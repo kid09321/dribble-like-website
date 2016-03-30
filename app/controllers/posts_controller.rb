@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
+    @photo = @post.build_photo
   end
 
   def create
@@ -21,10 +22,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.all
   end
 
   def edit
     @post = current_user.posts.find(params[:id])
+    @photo = @post.photo || @post.build_photo
+
   end
 
   def update
@@ -46,7 +50,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :link, :description)
+    params.require(:post).permit(:title, :link, :description, photo_attributes: [:image, :id])
   end
 
 end

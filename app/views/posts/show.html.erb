@@ -1,6 +1,12 @@
 <h1><%= @post.title %></h1>
+<% if @post.photo.present? %>
+<%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
+<% end %>
 <p><%= @post.link %></p>
 <p><%= @post.description %></p>
+<%= simple_form_for [@post, @post.comments.build] do |f| %>
+<%= f.input :content, class: "form-control" %>
+<%= f.submit "Submit", class: "btn btn-primary btn-sm", disable_with: "Submitting" %>
 
 <% if @post.is_editable?(current_user) %>
 <%= link_to("編輯貼文", edit_post_path(@post), class: "btn btn-info") %>
