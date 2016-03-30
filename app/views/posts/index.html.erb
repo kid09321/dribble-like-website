@@ -1,0 +1,5 @@
+<h1>Dribble table</h1>
+<div class="pull-right"><%= link_to("新增貼文", new_post_path, class: "btn btn-info") %></div>
+<% @posts.each do |post| %>
+<p><%= link_to(post.title, post_path(post))  %></p>
+<% end %>

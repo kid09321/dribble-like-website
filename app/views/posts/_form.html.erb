@@ -1,0 +1,6 @@
+<%= simple_form_for @post do |f| %>
+<%= f.input :title, class: "form-control" %>
+<%= f.input :link, class: "form-control" %>
+<%= f.input :description, class: "form-control" %>
+<%= f.submit "送出", disable_with: "submitting...", class: "btn btn-primary" %>
+<% end %>
