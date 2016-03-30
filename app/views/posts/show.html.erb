@@ -2,7 +2,8 @@
 <p><%= @post.link %></p>
 <p><%= @post.description %></p>
 
-
+<% if @post.is_editable?(current_user) %>
 <%= link_to("編輯貼文", edit_post_path(@post), class: "btn btn-info") %>
 <%= link_to("刪除貼文", post_path(@post),method: :delete, class: "btn btn-danger") %>
+<% end %>
 <%= link_to("返回首頁", root_path, class: "btn btn-primary") %>
