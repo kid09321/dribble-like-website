@@ -14,5 +14,6 @@
 <% end %>
 <% end %>
 <p><%= link_to(post.title, post_path(post))  %></p>
+<p><%= post.get_upvotes.size %><i class="fa fa-thumbs-o-up"></i></p>
 <p><%= render_comments_count(post) %>則留言</p>
 <% end %>

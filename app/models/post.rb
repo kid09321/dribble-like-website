@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   has_one :photo
   accepts_nested_attributes_for :photo
   has_many :comments
+  acts_as_votable
 
   def is_editable?(user)
     user == author

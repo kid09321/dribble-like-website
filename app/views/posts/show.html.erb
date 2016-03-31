@@ -1,10 +1,12 @@
 <%= link_to("回首頁", root_path, class: "btn btn-primary") %>
 <h1><%= @post.title %></h1>
 <% if @post.photo.present? %>
-<%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
+  <%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
 <% end %>
 <p><%= @post.link %></p>
 <p><%= @post.description %></p>
+<%= @post.get_upvotes.size %><%= link_to("Like", like_post_path(@post),method: :post, class: "fa fa-thumbs-o-up") %>
+<%= @post.get_downvotes.size %><%= link_to("Dislike", dislike_post_path(@post),method: :post, class: "fa fa-thumbs-o-down") %>
 <p><%= render_comments_count(@post) %>則留言</p>
 <% @comments.each do |comment| %>
 <p><%=  comment.content %></p>
