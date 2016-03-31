@@ -14,7 +14,11 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to posts_path, notice: "新增貼文成功"
+      if @post.photo.present?
+        redirect_to posts_path, notice: "新增貼文成功"
+      else
+        render "new"
+      end
     else
       render "new"
     end

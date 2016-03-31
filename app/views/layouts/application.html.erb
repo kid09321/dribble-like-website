@@ -12,8 +12,8 @@
 <%= render "common/navbar" %>
 </div>
 </header>
-<%= notice_message %>
-
+<%= flash[:notice] %>
+<%= flash[:alert] %>
 <div class="wrapper">
 <%= yield %>
 </div>
