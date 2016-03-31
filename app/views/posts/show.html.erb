@@ -1,15 +1,20 @@
+<%= link_to("回首頁", root_path, class: "btn btn-primary") %>
 <h1><%= @post.title %></h1>
 <% if @post.photo.present? %>
 <%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
 <% end %>
 <p><%= @post.link %></p>
 <p><%= @post.description %></p>
-<%= simple_form_for [@post, @post.comments.build] do |f| %>
+<p><%= render_comments_count(@post) %>則留言</p>
+<% @comments.each do |comment| %>
+<p><%=  comment.content %></p>
+<% end %>
+<%= simple_form_for [@post, @comments.build] do |f| %>
 <%= f.input :content, class: "form-control" %>
 <%= f.submit "Submit", class: "btn btn-primary btn-sm", disable_with: "Submitting" %>
-
+<% end %>
 <% if @post.is_editable?(current_user) %>
 <%= link_to("編輯貼文", edit_post_path(@post), class: "btn btn-info") %>
 <%= link_to("刪除貼文", post_path(@post),method: :delete, class: "btn btn-danger") %>
 <% end %>
-<%= link_to("返回首頁", root_path, class: "btn btn-primary") %>
+
