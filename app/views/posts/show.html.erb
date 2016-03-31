@@ -32,14 +32,33 @@
       <%= link_to("刪除貼文", post_path(@post),method: :delete, class: "data", data: {confirm: "Are you Sure?"}) %>
       <% end %>
     </div>
-  </div>
+    <div id="random_post">
+     <h3>看看別人的靈感</h3>
+     <div class="post">
+      <div class="post_image">
+        <%= link_to image_tag(@random_post.photo.image.medium.url), post_path(@random_post) %>
+      </div>
+      <div class="post_content">
+        <div class="title">
+          <h2><%= link_to @random_post.title, post_path(@random_post) %></h2>
+        </div>
+        <div class="data clearfix">
+          <p class="username"><%=  @random_post.author.name %></p>
+          <p class="buttons">
+            <span><i class="fa fa-thumbs-o-up"></i><%= @random_post.get_upvotes.size %>
+            <i class="fa fa-comments-o"></i>
+          <%= render_comments_count(@random_post) %></span>
+          </p>
+        </div>
+      </div>
+    </div>
 </div>
 <div id="comments">
 <% @comments.each do |comment| %>
 
   <div class="comment">
-    <%= comment.user.name %>
-    <%= comment.content %>
+    <p class="username"><%= comment.user.name %></p>
+    <p class="content"><%= comment.content %></p>
   </div>
 <% end %>
 <%= simple_form_for [@post, @comments.build] do |f| %>
@@ -47,4 +66,8 @@
 <%= f.submit "Submit", class: "button", disable_with: "Submitting" %>
 <% end %>
 </div>
+
+</div>
+</div>
+
 
