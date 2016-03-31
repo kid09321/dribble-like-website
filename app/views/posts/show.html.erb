@@ -36,6 +36,7 @@
      <h3>看看別人的靈感</h3>
      <div class="post">
       <div class="post_image">
+      <% if @random_post.photo.present? %>
         <%= link_to image_tag(@random_post.photo.image.medium.url), post_path(@random_post) %>
       </div>
       <div class="post_content">
