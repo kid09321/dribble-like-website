@@ -1,19 +1,15 @@
 <h1>Dribble table</h1>
-<div class="pull-right"><%= link_to("編輯帳號", edit_user_registration_path) %></div>
 <div class="pull-right"><%= link_to("新增貼文", new_post_path, class: "btn btn-info") %></div>
-<% if !current_user %>
-<div class="pull-right"><%= link_to("登入", new_user_session_path, class: "btn btn-primary") %></div>
-<% else %>
-<p>Welcome back！ <%= current_user.name %> </p>
-<div class="pull-right"><%= link_to("登出", destroy_user_session_path,method: :delete, class: "btn btn-primary") %></div>
-<% end %>
 <% @posts.each do |post| %>
+<div class="col-md-3"
+<div class="panel panel-default">
 <% if post.photo.present? %>
 <%= link_to post_path(post) do %>
-<%= image_tag( post.photo.image.medium.url, class: "thumbnail") %>
+<div class="panel-body"><%= image_tag( post.photo.image.medium.url, class: "thumbnail") %></div>
 <% end %>
 <% end %>
-<p><%= link_to(post.title, post_path(post))  %></p>
+<div class="panel-footer"><%= link_to(post.title, post_path(post))  %>
 <p><%= post.get_upvotes.size %><i class="fa fa-thumbs-o-up"></i></p>
-<p><%= render_comments_count(post) %>則留言</p>
+<p><%= render_comments_count(post) %>則留言</p></div>
+</div>
 <% end %>
