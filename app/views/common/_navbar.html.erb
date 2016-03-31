@@ -22,15 +22,15 @@
     </div>
   </div>
 </nav> -->
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
+<!-- <nav class="navbar navbar-default" role="navigation">
+
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">ArtStore</a>
-    </div>
+    <!-- <div class="navbar-header">
+      <a class="navbar-brand" href="/">Inspiration</a>
+    </div> -->
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
           <%= link_to("Products", "#") %>
@@ -54,8 +54,20 @@
             </ul>
           </li>
         <% end %>
-
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+ -->
+ <!--      </ul>
+    </div> --><!-- /.navbar-collapse -->
+  <!-- /.container-fluid -->
+<!-- </nav> -->
+<div id="logo">
+<%= link_to("Inspiration", root_path) %>
+</div>
+<nav>
+<% if !current_user %>
+  <%= link_to("登入", new_user_session_path) %>
+<% else %>
+  <%= link_to(current_user.name, edit_user_registration_path ) %>
+  <%= link_to("新增Inspiration", new_post_path, class: "button") %>
+  <%= link_to("登出", destroy_user_session_path, method: :delete ) %>
+<% end %>
 </nav>

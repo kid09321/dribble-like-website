@@ -7,10 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="container">
+<header>
+<div class="wrapper clearfix">
 <%= render "common/navbar" %>
+</div>
+</header>
 <%= notice_message %>
+
+<div class="wrapper">
 <%= yield %>
+</div>
 </div>
 </body>
 </html>

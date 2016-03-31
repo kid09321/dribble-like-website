@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem "font-awesome-rails"
 gem 'acts_as_votable', '~> 0.10.0'
-gem "bootstrap-sass"
 gem "carrierwave"
 gem "mini_magick"
 gem "simple_form"

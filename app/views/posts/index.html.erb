@@ -1,15 +1,39 @@
-<h1>Dribble table</h1>
-<div class="pull-right"><%= link_to("新增貼文", new_post_path, class: "btn btn-info") %></div>
+<% if current_user %>
+<p id="intro">
+Hello! <%= current_user.name %>
+  <br />
+  <span>分享您的靈感</span>
+</p>
+<% end %>
+<div id="posts">
 <% @posts.each do |post| %>
-<div class="col-md-3"
-<div class="panel panel-default">
 <% if post.photo.present? %>
-<%= link_to post_path(post) do %>
-<div class="panel-body"><%= image_tag( post.photo.image.medium.url, class: "thumbnail") %></div>
+<div class="post">
+  <div class="post_image">
+    <%= link_to post_path(post) do %>
+      <%= image_tag( post.photo.image.medium.url) %>
+    <% end %>
+  </div>
 <% end %>
-<% end %>
-<div class="panel-footer"><%= link_to(post.title, post_path(post))  %>
-<p><%= post.get_upvotes.size %><i class="fa fa-thumbs-o-up"></i></p>
-<p><%= render_comments_count(post) %>則留言</p></div>
+<div class="post_content">
+  <div class="post_title">
+    <h2><%= link_to(post.title, post_path(post))  %></h2>
+  </div>
+  <div class="data clearfix">
+    <p class="username">
+      Shared by<%= post.author.name %>
+    </p>
+    <p class="buttons">
+      <span>
+        <i class="fa fa-comments-o"></i>
+        <%= render_comments_count(post) %>
+      </span>
+      <span>
+        <i class="fa fa-thumbs-o-up"></i>
+        <%= post.get_upvotes.size %>
+      </span>
+    </p>
+  </div>
+</div>
 </div>
 <% end %>

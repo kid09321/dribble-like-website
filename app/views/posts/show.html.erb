@@ -1,21 +1,50 @@
-<h1><%= @post.title %></h1>
-<% if @post.photo.present? %>
-  <%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
-<% end %>
-<p><%= @post.link %></p>
-<p><%= @post.description %></p>
-<%= @post.get_upvotes.size %><%= link_to("Like", like_post_path(@post),method: :post, class: "fa fa-thumbs-o-up") %>
-<%= @post.get_downvotes.size %><%= link_to("Dislike", dislike_post_path(@post),method: :post, class: "fa fa-thumbs-o-down") %>
-<p><%= render_comments_count(@post) %>則留言</p>
+<div id="post_show">
+  <h1><%= @post.title %></h1>
+  <p class="username">
+  Shared by
+  <%= @post.author.name %>
+  </p>
+
+<div class="clearfix">
+  <% if @post.photo.present? %>
+  <div class="post_image_description">
+  <%= image_tag(@post.photo.image.url) %>
+  <% end %>
+    <div class="description">
+      <%= simple_format(@post.description) %>
+    </div>
+  </div>
+    <div class="post_data">
+      <%= link_to("查看連結", @post.link, class: "button") %>
+      <%= link_to like_post_path(@post),method: :post, class: "data" do %>
+      <i class="fa fa-thumbs-o-up"></i><%= @post.get_upvotes.size %>
+      <% end %>
+      <%= link_to dislike_post_path(@post),method: :post, class: "data" do %>
+      <i class="fa fa-thumbs-o-down"></i>
+      <%= @post.get_downvotes.size %>
+      <% end %>
+      <p class="data">
+        <i class="fa fa-comments-o"></i>
+        <%= render_comments_count(@post) %>
+      </p>
+      <% if @post.is_editable?(current_user) %>
+      <%= link_to("編輯貼文", edit_post_path(@post), class: "data") %>
+      <%= link_to("刪除貼文", post_path(@post),method: :delete, class: "data", data: {confirm: "Are you Sure?"}) %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div id="comments">
 <% @comments.each do |comment| %>
-<p><%=  comment.content %></p>
+
+  <div class="comment">
+    <%= comment.user.name %>
+    <%= comment.content %>
+  </div>
 <% end %>
 <%= simple_form_for [@post, @comments.build] do |f| %>
-<%= f.input :content, class: "form-control" %>
-<%= f.submit "Submit", class: "btn btn-primary btn-sm", disable_with: "Submitting" %>
+<%= f.input :content %>
+<%= f.submit "Submit", class: "button", disable_with: "Submitting" %>
 <% end %>
-<% if @post.is_editable?(current_user) %>
-<%= link_to("編輯貼文", edit_post_path(@post), class: "btn btn-info") %>
-<%= link_to("刪除貼文", post_path(@post),method: :delete, class: "btn btn-danger") %>
-<% end %>
+</div>
 
