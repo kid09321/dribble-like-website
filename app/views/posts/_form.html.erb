@@ -1,12 +1,24 @@
-<% if @post.photo.image.present? %>
-<%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
-<% end %>
-<%= simple_form_for @post do |f| %>
-<%= f.input :title, class: "form-control" %>
-<%= f.input :link, class: "form-control" %>
-<%= f.input :description, class: "form-control" %>
-<%= f.simple_fields_for :photo do |c| %>
-<%= c.input :image, as: :file %>
-<% end %>
-<%= f.submit "送出", disable_with: "submitting...", class: "btn btn-primary" %>
-<% end %>
+<div class="form">
+  <div class="form-picture">
+    <% if @post.photo.image.present? %>
+    <%= image_tag(@post.photo.image.thumb.url, class: "thumbnail") %>
+    <% end %>
+  </div>
+  <div class="clearfix">
+  <div class="form-input">
+  <%= simple_form_for @post do |f| %>
+    <%= f.input :title, label: "作品標題" %>
+    <%= f.input :link, label: "作品連結" %>
+    <div class="form-content">
+      <%= f.input :description, label: "作品敘述" %>
+    </div>
+    <%= f.simple_fields_for :photo do |c| %>
+      <%= c.input :image, as: :file %>
+    <% end %>
+  </div>
+  </div>
+  <div class="form-submit">
+    <%= f.submit "送出", disable_with: "submitting...", class: "button" %>
+  <% end %>
+  </div>
+</div>
