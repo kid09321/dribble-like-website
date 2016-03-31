@@ -38,6 +38,7 @@
       <div class="post_image">
       <% if @random_post.photo.present? %>
         <%= link_to image_tag(@random_post.photo.image.medium.url), post_path(@random_post) %>
+        <% end %>
       </div>
       <div class="post_content">
         <div class="title">
