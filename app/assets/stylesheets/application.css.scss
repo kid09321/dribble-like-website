@@ -75,38 +75,7 @@ header {
     }
   }
 }
-.form {
-  width:50%;
-  margin:0 auto;
-  text-align:center;
-    .form-input{
-      input{
-      font-size:18px;
-      margin: 1rem 0;
-      min-height:30px;
-      width:100%;
-      border: 1px solid #E4E4E4;
-      background: #F8F9FA;
-      border-radius: 0.3rem;
-      }
-    }
-    .form-content{
-      textarea{
-      margin: 1rem 0;
-      min-height: 150px;
-      max-height:150px;
-      width:100%;
-      max-width:100%;
-      border: 1px solid #E4E4E4;
-      background: #F8F9FA;
-      border-radius: 0.3rem;
-      }
 
-    }
-    .form-submit{
-
-    }
-}
 
 @import "font-awesome";
 @import "home.css.scss";
